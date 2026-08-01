@@ -19,10 +19,11 @@ export function createApp() {
                     return callback(null, true);
                 }
 
-                const isLocalhost = origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:');
+                const isLocalhost = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
                 const isAllowed = corsOrigins.includes(origin) ||
                     corsOrigins.includes('*') ||
-                    (env.NODE_ENV === 'development' && isLocalhost);
+                    isLocalhost ||
+                    env.NODE_ENV !== 'production';
 
                 if (isAllowed) {
                     callback(null, true);

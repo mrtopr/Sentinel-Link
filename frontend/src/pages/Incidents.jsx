@@ -287,110 +287,129 @@ const Incidents = () => {
                                 </div>
                             ) : (
                                 filteredIncidentsList.length > 0 ? (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                                         {filteredIncidentsList.map((incident) => (
                                             <div
                                                 key={incident.id}
-                                                className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full cursor-pointer"
+                                                className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full cursor-pointer hover:-translate-y-1"
                                                 onClick={() => setSelectedIncident(incident)}
                                             >
-                                                <div className="relative w-full pt-[56.25%] overflow-hidden bg-gray-900">
-                                                    <div className="absolute inset-0">
-                                                        {incident.mediaUrl ? (
-                                                            (incident.mediaUrl?.match(/\.(mp4|webm|ogg|mov)$/i)) ? (
-                                                                <video
-                                                                    src={incident.mediaUrl}
-                                                                    className="w-full h-full object-cover"
-                                                                    muted
-                                                                    loop
-                                                                    onMouseOver={e => e.currentTarget.play()}
-                                                                    onMouseOut={e => e.currentTarget.pause()}
-                                                                />
-                                                            ) : (
-                                                                <img
-                                                                    src={incident.mediaUrl || incident.image}
-                                                                    alt={incident.incidentType}
-                                                                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                                                                />
-                                                            )
+                                                {/* Media Preview Header */}
+                                                <div className="relative w-full h-44 overflow-hidden bg-gray-900">
+                                                    {incident.mediaUrl ? (
+                                                        (incident.mediaUrl?.match(/\.(mp4|webm|ogg|mov)$/i)) ? (
+                                                            <video
+                                                                src={incident.mediaUrl}
+                                                                className="w-full h-full object-cover"
+                                                                muted
+                                                                loop
+                                                                onMouseOver={e => e.currentTarget.play()}
+                                                                onMouseOut={e => e.currentTarget.pause()}
+                                                            />
                                                         ) : (
-                                                            <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                                                                <AlertCircle className="w-10 h-10 text-gray-300" />
-                                                            </div>
-                                                        )}
-                                                        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent via-40% to-black/90"></div>
+                                                            <img
+                                                                src={incident.mediaUrl || incident.image}
+                                                                alt={incident.incidentType}
+                                                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                                            />
+                                                        )
+                                                    ) : (
+                                                        <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                                                            <AlertCircle className="w-8 h-8 text-gray-500" />
+                                                        </div>
+                                                    )}
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+
+                                                    {/* Top Badges */}
+                                                    <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+                                                        <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-white shadow-sm">
+                                                            {getIconForType(incident.incidentType)}
+                                                            <span className="font-bold text-xs tracking-wide">
+                                                                {incident.incidentType ? incident.incidentType.replace(/_/g, ' ') : 'Incident'}
+                                                            </span>
+                                                        </div>
+                                                        <Badge
+                                                            label={incident.severity}
+                                                            type="severity"
+                                                            value={incident.severity}
+                                                            className={`border-none text-[11px] font-extrabold px-2.5 py-0.5 shadow-md ${incident.severity === 'HIGH'
+                                                                    ? 'bg-red-600 text-white'
+                                                                    : incident.severity === 'MEDIUM'
+                                                                        ? 'bg-amber-500 text-white'
+                                                                        : 'bg-emerald-600 text-white'
+                                                                }`}
+                                                        />
                                                     </div>
 
-                                                    <div className="absolute inset-0 p-5 flex flex-col justify-between text-white">
-                                                        <div className="flex justify-between items-start">
-                                                            <div className="flex items-center gap-2 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-lg border border-white/10">
-                                                                {getIconForType(incident.incidentType)}
-                                                                <span className="font-bold text-sm">{incident.incidentType || 'Incident'}</span>
-                                                            </div>
-                                                            <Badge
-                                                                label={incident.severity}
-                                                                type="severity"
-                                                                value={incident.severity}
-                                                                className={`border-none shadow-sm ${incident.severity === 'HIGH' ? 'bg-red-500 text-white' : incident.severity === 'MEDIUM' ? 'bg-orange-500 text-white' : 'bg-gray-500/80 backdrop-blur-md text-white'}`}
-                                                            />
+                                                    {/* Location Badge on Image Bottom */}
+                                                    {incident.location && (
+                                                        <div className="absolute bottom-2 left-3 right-3 flex items-center gap-1 text-[11px] font-medium text-white/90 truncate drop-shadow-md">
+                                                            <MapPin className="w-3.5 h-3.5 shrink-0 text-red-400" />
+                                                            <span className="truncate">{incident.location}</span>
                                                         </div>
+                                                    )}
+                                                </div>
 
-                                                        <div className="space-y-3">
-                                                            <div className="flex items-center gap-3 text-xs font-medium text-white/90">
-                                                                <span className="flex items-center gap-1">
-                                                                    <Clock className="w-3 h-3" />
-                                                                    {getTimeString(incident.createdAt || incident.reportedAt)}
+                                                {/* Content Body */}
+                                                <div className="p-4 flex flex-col justify-between flex-grow space-y-3 bg-white">
+                                                    <div>
+                                                        {/* Status & Time */}
+                                                        <div className="flex items-center justify-between gap-2 mb-2 text-xs font-medium text-gray-500">
+                                                            <span className="flex items-center gap-1 text-gray-500">
+                                                                <Clock className="w-3.5 h-3.5 text-gray-400" />
+                                                                {getTimeString(incident.createdAt || incident.reportedAt)}
+                                                            </span>
+
+                                                            {incident.status === 'VERIFIED' && (
+                                                                <span className="inline-flex items-center gap-1 bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-bold text-[10px] border border-green-200">
+                                                                    <CheckCircle2 className="w-3 h-3 text-green-600" />
+                                                                    Verified
                                                                 </span>
-                                                                {incident.status === 'VERIFIED' && (
-                                                                    <span className="flex items-center gap-1 bg-green-500/20 text-green-300 px-1.5 py-0.5 rounded border border-green-500/30">
-                                                                        <CheckCircle2 className="w-3 h-3" />
-                                                                        Verified
-                                                                    </span>
-                                                                )}
-                                                                {incident.status === 'IN_PROGRESS' && (
-                                                                    <span className="flex items-center gap-1 bg-yellow-500/20 text-yellow-300 px-1.5 py-0.5 rounded border border-yellow-500/30">
-                                                                        <Clock className="w-3 h-3" />
-                                                                        In Progress
-                                                                    </span>
-                                                                )}
-                                                                {incident.status === 'RESOLVED' && (
-                                                                    <span className="flex items-center gap-1 bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded border border-blue-500/30">
-                                                                        <CheckCircle2 className="w-3 h-3" />
-                                                                        Resolved
-                                                                    </span>
-                                                                )}
-                                                            </div>
-
-                                                            <div>
-                                                                <p className="text-sm font-medium text-white line-clamp-1 mb-3 opacity-90">
-                                                                    {incident.description}
-                                                                </p>
-                                                                <button
-                                                                    onClick={(e) => handleUpvote(e, incident.id)}
-                                                                    disabled={votedIncidents.has(incident.id)}
-                                                                    className={`w-full font-bold py-2 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors shadow-lg active:scale-95 ${votedIncidents.has(incident.id)
-                                                                        ? 'bg-green-100 text-green-700 cursor-default'
-                                                                        : 'bg-white hover:bg-gray-50 text-blue-600'
-                                                                        }`}
-                                                                >
-                                                                    {votedIncidents.has(incident.id) ? (
-                                                                        <>
-                                                                            <CheckCircle2 className="w-4 h-4" />
-                                                                            Confirmed ({incident.upvoteCount || 0})
-                                                                        </>
-                                                                    ) : (
-                                                                        <>
-                                                                            <div className="flex items-center gap-1">
-                                                                                <span>Confirm / Upvote</span>
-                                                                                <span className="bg-blue-100/50 text-blue-600 px-1.5 py-0.5 rounded text-xs ml-1">
-                                                                                    {incident.upvoteCount || 0}
-                                                                                </span>
-                                                                            </div>
-                                                                        </>
-                                                                    )}
-                                                                </button>
-                                                            </div>
+                                                            )}
+                                                            {incident.status === 'IN_PROGRESS' && (
+                                                                <span className="inline-flex items-center gap-1 bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full font-bold text-[10px] border border-amber-200">
+                                                                    <Clock className="w-3 h-3 text-amber-600" />
+                                                                    In Progress
+                                                                </span>
+                                                            )}
+                                                            {incident.status === 'RESOLVED' && (
+                                                                <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full font-bold text-[10px] border border-blue-200">
+                                                                    <CheckCircle2 className="w-3 h-3 text-blue-600" />
+                                                                    Resolved
+                                                                </span>
+                                                            )}
                                                         </div>
+
+                                                        {/* Title / Description */}
+                                                        <h3 className="font-bold text-gray-900 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                                                            {incident.description}
+                                                        </h3>
+                                                    </div>
+
+                                                    {/* Action Button Footer */}
+                                                    <div className="pt-2 border-t border-gray-100">
+                                                        <button
+                                                            onClick={(e) => handleUpvote(e, incident.id)}
+                                                            disabled={votedIncidents.has(incident.id)}
+                                                            className={`w-full font-bold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-sm ${votedIncidents.has(incident.id)
+                                                                    ? 'bg-green-50 text-green-700 border border-green-200 cursor-default'
+                                                                    : 'bg-primary/10 hover:bg-primary text-primary hover:text-white active:scale-98'
+                                                                }`}
+                                                        >
+                                                            {votedIncidents.has(incident.id) ? (
+                                                                <>
+                                                                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                                                                    Confirmed ({incident.upvoteCount || 0})
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    <span>Confirm / Upvote</span>
+                                                                    <span className="bg-primary/20 group-hover:bg-white/20 text-current px-2 py-0.5 rounded-full text-[10px] font-extrabold">
+                                                                        {incident.upvoteCount || 0}
+                                                                    </span>
+                                                                </>
+                                                            )}
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>

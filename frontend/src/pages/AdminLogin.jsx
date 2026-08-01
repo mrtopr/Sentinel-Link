@@ -5,8 +5,8 @@ import Button from '../components/ui/Button.jsx';
 import { authApi } from '../api/auth.js';
 
 const AdminLogin = () => {
-    const [email, setEmail] = useState('admin@sentinellink.com');
-    const [password, setPassword] = useState('password');
+    const [email, setEmail] = useState(import.meta.env.VITE_DEFAULT_ADMIN_EMAIL || '');
+    const [password, setPassword] = useState(import.meta.env.VITE_DEFAULT_ADMIN_PASSWORD || '');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 

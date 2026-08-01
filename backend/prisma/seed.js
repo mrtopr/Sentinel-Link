@@ -1,13 +1,14 @@
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 async function main() {
-    const adminEmail = 'admin@sentinellink.com';
-    const adminPassword = 'password';
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@sentinellink.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'password';
 
-    console.log('Seed: Checking for existing admin user...');
+    console.log(`Seed: Checking for existing admin user (${adminEmail})...`);
 
     const existingAdmin = await prisma.user.findUnique({
         where: { email: adminEmail },
