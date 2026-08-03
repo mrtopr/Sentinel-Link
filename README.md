@@ -1,10 +1,8 @@
-# 🚨 SentinelLink (Anginat)
+# 🚨 SentinelLink (Anginat) - Emergency Response Coordination Platform
 
-### Real-Time Emergency Response Coordination Platform
+**SentinelLink** (codenamed *Anginat*) is a real-time incident reporting and resource coordination platform designed to bridge the gap between citizens reporting emergencies and authorities responding to them.
 
-**SentinelLink** (codenamed **Anginat**) is a real-time incident reporting and emergency resource coordination platform designed to bridge the gap between **citizens reporting emergencies** and **authorities responding to them**.
-
-Built for a **Hackathon**, SentinelLink leverages **real-time WebSockets, geospatial visualization, community validation, and automated duplicate detection** to make emergency reporting and response faster, smarter, and more coordinated.
+Built for a **Hackathon**, the platform leverages real-time communication, geospatial visualization, community validation, and automated duplicate detection to streamline emergency response.
 
 ![Live Feed Status](https://img.shields.io/badge/Status-Live-green)
 ![Tech Stack](https://img.shields.io/badge/Stack-PERN-blue)
@@ -18,82 +16,79 @@ Built for a **Hackathon**, SentinelLink leverages **real-time WebSockets, geospa
 
 ### 🔗 Application
 
-* **Frontend:** [sentinel-link-xxys.vercel.app](https://sentinel-link-xxys.vercel.app)
-* **Backend API:** [sentinellink-backend.onrender.com](https://sentinellink-backend.onrender.com)
-* **API Health Check:** [sentinellink-backend.onrender.com/health](https://sentinellink-backend.onrender.com/health)
+- **Frontend (Vercel):** [https://sentinel-link-xxys.vercel.app](https://sentinel-link-xxys.vercel.app)
+- **Backend API (Render):** [https://sentinellink-backend.onrender.com](https://sentinellink-backend.onrender.com)
+- **API Health Check:** [https://sentinellink-backend.onrender.com/health](https://sentinellink-backend.onrender.com/health)
 
 ### 💻 Source Code
 
-* **Frontend Repository:** [SentinelLink-Frontend](https://github.com/mrtopr/SentinelLink-Frontend)
-* **Backend Repository:** [SentinelLink-Backend](https://github.com/mrtopr/SentinelLink-Backend)
+- **Frontend Repository:** [SentinelLink-Frontend](https://github.com/mrtopr/SentinelLink-Frontend)
+- **Backend Repository:** [SentinelLink-Backend](https://github.com/mrtopr/SentinelLink-Backend)
 
 ---
 
 ## ✨ Key Features
 
-### 🌍 Citizen Portal
+### 🌍 For Citizens
 
-SentinelLink provides citizens with a simple and responsive interface for reporting and tracking emergencies.
+- **🚨 Instant Reporting**  
+  Report incidents such as Fire, Accident, Medical Emergency, and other critical events with location detection and media uploads.
 
-* **🚨 Instant Reporting**
-  Report incidents such as fires, accidents, medical emergencies, and other critical events with automatic location detection and media uploads.
-
-* **🗺️ Live Map View**
+- **🗺️ Live Map View**  
   Visualize ongoing incidents in real time using an interactive map and heatmap.
 
-* **👍 Community Validation**
+- **👍 Community Validation**  
   Citizens can upvote reported incidents to help verify their authenticity and significance.
 
-* **📱 Responsive Design**
-  Mobile-first interface designed for fast emergency reporting from any device.
+- **📱 Responsive Design**  
+  Mobile-first interface designed for quick emergency reporting from any device.
 
 ---
 
-### 🛡️ Authority / Admin Portal
+### 🛡️ For Authorities (Admin)
 
-Authorities receive access to a centralized emergency command dashboard.
+- **📊 Command Dashboard**  
+  Centralized view of active incidents, severity levels, statuses, and emergency trends.
 
-* **📊 Command Dashboard**
-  Monitor active incidents, severity levels, status distribution, and emergency trends.
+- **⚡ Real-Time Updates**  
+  Receive instant notifications through Socket.IO whenever new incidents are reported or existing incidents are updated.
 
-* **⚡ Real-Time Updates**
-  Receive instant updates through **Socket.IO** whenever new incidents are reported or existing incidents change.
-
-* **🛠️ Incident Management**
+- **🛠️ Incident Management**  
   Verify, resolve, flag, update, or delete reported incidents.
 
-* **🔍 Duplicate Detection**
-  Automatically identify potentially duplicate reports based on geographical and temporal proximity.
+- **🔍 Duplicate Detection**  
+  Automatically flag potentially duplicate reports based on geographical and temporal proximity.
 
   **Default detection parameters:**
+  - Distance: `200 meters`
+  - Time Window: `10 minutes`
 
-  * Distance: `200 meters`
-  * Time Window: `10 minutes`
-
-* **📢 Emergency Broadcasts**
-  Trigger system-wide alerts and emergency notifications for connected users.
+- **📢 Emergency Broadcast**  
+  Trigger system-wide emergency alerts for all connected users.
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Component                   | Technologies                             |
-| --------------------------- | ---------------------------------------- |
-| **Frontend**                | React 18, Vite, TypeScript, Tailwind CSS |
-| **Maps**                    | Leaflet                                  |
-| **Real-Time Communication** | Socket.IO Client                         |
-| **Backend**                 | Node.js, Express                         |
-| **ORM**                     | Prisma                                   |
-| **Database**                | PostgreSQL                               |
-| **Real-Time Server**        | Socket.IO                                |
-| **Media Storage**           | Cloudinary                               |
-| **Development**             | TypeScript, ESLint                       |
-| **Frontend Deployment**     | Vercel                                   |
-| **Backend Deployment**      | Render                                   |
+| Component | Technologies |
+| --- | --- |
+| **Frontend** | React 18, Vite, TypeScript, Tailwind CSS |
+| **Maps** | Leaflet |
+| **Real-Time Client** | Socket.IO Client |
+| **Backend** | Node.js, Express |
+| **ORM** | Prisma ORM |
+| **Database** | PostgreSQL |
+| **Real-Time Server** | Socket.IO |
+| **Media Storage** | Cloudinary |
+| **Development** | TypeScript, ESLint |
+| **Frontend Deployment** | Vercel |
+| **Backend Deployment** | Render |
 
 ---
 
-## 🧠 System Architecture
+## 🧠 System Architecture & Scalability
+
+### Architecture Overview
 
 SentinelLink follows a modern client-server architecture combining **REST APIs** with **WebSocket-based real-time communication**.
 
@@ -121,7 +116,6 @@ SentinelLink follows a modern client-server architecture combining **REST APIs**
 │         Socket.IO           │
 └──────────┬─────────┬────────┘
            │         │
-           │         │
            ▼         ▼
 ┌────────────────┐  ┌────────────────┐
 │   PostgreSQL   │  │   Cloudinary   │
@@ -129,15 +123,15 @@ SentinelLink follows a modern client-server architecture combining **REST APIs**
 └────────────────┘  └────────────────┘
 ```
 
-### Architecture Overview
+### How It Works
 
-* Frontend communicates with the backend using **REST APIs** and **WebSockets**.
-* Backend manages authentication, incident processing, duplicate detection, and real-time events.
-* **PostgreSQL** stores structured incident, user, and verification data.
-* **Prisma ORM** provides type-safe database access.
-* **Cloudinary** handles media uploads and storage.
-* **Socket.IO** provides low-latency communication between citizens and authorities.
-* **Leaflet** powers interactive geospatial incident visualization.
+- Frontend communicates with the backend using **REST APIs** and **WebSockets**.
+- Backend handles authentication, incident processing, duplicate detection, and real-time updates.
+- **PostgreSQL** stores structured incident, user, and verification data.
+- **Prisma ORM** provides type-safe database access.
+- **Cloudinary** handles media uploads and storage.
+- **Socket.IO** ensures low-latency communication between citizens and authorities.
+- **Leaflet** powers interactive geospatial incident visualization.
 
 ---
 
@@ -145,22 +139,22 @@ SentinelLink follows a modern client-server architecture combining **REST APIs**
 
 SentinelLink was designed with future scalability in mind.
 
-* **Stateless Backend**
+- **Stateless Backend**  
   Enables horizontal scaling across multiple backend instances.
 
-* **WebSocket Rooms**
+- **WebSocket Rooms**  
   Reduce unnecessary broadcast traffic by targeting relevant connected clients.
 
-* **Duplicate Detection**
+- **Duplicate Detection**  
   Helps reduce redundant emergency reports during high-traffic events.
 
-* **Cloud Media Storage**
+- **Cloud Media Storage**  
   Media files are offloaded to Cloudinary instead of being stored directly on the application server.
 
-* **Database Indexing**
+- **Database Indexing**  
   Time and geolocation-related fields can be indexed for efficient incident queries.
 
-* **Modular Architecture**
+- **Modular Architecture**  
   Backend services and frontend components can be extended independently.
 
 ---
@@ -171,19 +165,31 @@ SentinelLink was designed with future scalability in mind.
 
 Make sure the following are installed or configured:
 
-* **Node.js v18+**
-* **npm**
-* **PostgreSQL**
-* **Cloudinary Account**
-* **Git**
+- Node.js `v18+`
+- npm
+- PostgreSQL
+- Cloudinary Account
+- Git
 
 ---
 
 ## 1️⃣ Clone the Repository
 
+Clone the project:
+
 ```bash
 git clone https://github.com/mrtopr/SentinelLink.git
-cd "Hackathon project"
+cd SentinelLink
+```
+
+The repository contains both the frontend and backend:
+
+```text
+SentinelLink/
+├── backend/
+├── frontend/
+├── README.md
+└── WALKTHROUGH.md
 ```
 
 ---
@@ -204,7 +210,7 @@ npm install
 
 ### Configure Environment Variables
 
-Create a `.env` file inside the `backend/` directory.
+Create a `.env` file inside the `backend/` directory:
 
 ```env
 PORT=3000
@@ -220,11 +226,9 @@ CLOUDINARY_API_SECRET="your_api_secret"
 CORS_ORIGINS="http://localhost:5173,http://localhost:3000"
 ```
 
-> ⚠️ Never commit your `.env` file or production credentials to GitHub.
+> ⚠️ **Security:** Never commit your `.env` file or production credentials to GitHub.
 
-### Run Prisma
-
-Run database migrations:
+### Run Prisma Migrations
 
 ```bash
 npx prisma migrate dev --name init
@@ -236,13 +240,13 @@ Generate the Prisma client:
 npx prisma generate
 ```
 
-### Start Backend
+### Start the Backend
 
 ```bash
 npm run dev
 ```
 
-The backend should now be available at:
+The backend should now be running at:
 
 ```text
 http://localhost:3000
@@ -266,19 +270,19 @@ npm install
 
 ### Configure Environment Variables
 
-Create a `.env` file inside the `frontend/` directory.
+Create a `.env` file inside the `frontend/` directory:
 
 ```env
 VITE_API_BASE_URL=http://localhost:3000/api
 ```
 
-### Start Frontend
+### Start the Frontend
 
 ```bash
 npm run dev
 ```
 
-The frontend should now be available at:
+The frontend should now be running at:
 
 ```text
 http://localhost:5173
@@ -298,30 +302,30 @@ http://localhost:5173
 
 ## 🚨 Incident APIs
 
-| Method   | Endpoint                  | Description                                       |
-| -------- | ------------------------- | ------------------------------------------------- |
-| `GET`    | `/incidents`              | Retrieve incidents with optional filters          |
-| `POST`   | `/incidents`              | Report a new incident using `multipart/form-data` |
-| `GET`    | `/incidents/:id`          | Retrieve details of a specific incident           |
-| `PATCH`  | `/incidents/:id/status`   | Update incident status — Admin                    |
-| `PATCH`  | `/incidents/:id/severity` | Update incident severity — Admin                  |
-| `DELETE` | `/incidents/:id`          | Delete an incident — Admin                        |
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/incidents` | Retrieve incidents with optional filters |
+| `POST` | `/incidents` | Report a new incident using `multipart/form-data` |
+| `GET` | `/incidents/:id` | Retrieve details of a specific incident |
+| `PATCH` | `/incidents/:id/status` | Update incident status (Admin) |
+| `PATCH` | `/incidents/:id/severity` | Update incident severity (Admin) |
+| `DELETE` | `/incidents/:id` | Delete an incident (Admin) |
 
 ---
 
 ## 🔐 Authentication APIs
 
-| Method | Endpoint      | Description                   |
-| ------ | ------------- | ----------------------------- |
+| Method | Endpoint | Description |
+| --- | --- | --- |
 | `POST` | `/auth/login` | Authenticate an administrator |
 
 ---
 
 ## 📊 Statistics APIs
 
-| Method | Endpoint           | Description                         |
-| ------ | ------------------ | ----------------------------------- |
-| `GET`  | `/incidents/stats` | Retrieve aggregate incident metrics |
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/incidents/stats` | Retrieve aggregate incident metrics |
 
 ---
 
@@ -344,7 +348,7 @@ Password: admin123
 
 SentinelLink uses **Socket.IO** to synchronize emergency information between citizens and authorities.
 
-Typical real-time events include:
+### Typical Real-Time Flow
 
 ```text
 Citizen Reports Incident
@@ -365,7 +369,7 @@ Backend Processes Report
               Authority Dashboard
                        │
                        ▼
-                Live UI Update
+                 Live UI Update
 ```
 
 This allows authorities to receive new emergency reports without manually refreshing the dashboard.
@@ -374,15 +378,15 @@ This allows authorities to receive new emergency reports without manually refres
 
 # 🔍 Duplicate Detection
 
-During large emergencies, multiple citizens may report the same event.
+During large-scale emergencies, multiple citizens may report the same event.
 
-SentinelLink attempts to detect these duplicate reports using:
+SentinelLink attempts to identify duplicate reports using:
 
-* Geographic distance
-* Report timestamps
-* Incident proximity
+- Geographic distance
+- Report timestamps
+- Incident proximity
 
-Default configuration:
+### Default Configuration
 
 ```text
 Maximum Distance: 200 meters
@@ -396,7 +400,7 @@ Reports falling within these thresholds can be flagged as potential duplicates f
 # 📂 Project Structure
 
 ```text
-Hackathon project/
+SentinelLink/
 │
 ├── backend/
 │   ├── prisma/
@@ -420,61 +424,60 @@ Hackathon project/
 │   ├── .env
 │   └── package.json
 │
-└── README.md
+├── README.md
+└── WALKTHROUGH.md
 ```
 
 ---
 
 # 🔮 Future Scope & Enhancements
 
-SentinelLink can be extended into a production-scale emergency coordination ecosystem.
+## 🤖 AI & Automation
 
-### 🤖 AI & Automation
+- AI-based incident classification
+- Automatic severity prediction
+- Image-based emergency detection
+- Intelligent duplicate detection
+- Automated authority assignment
 
-* AI-based incident classification
-* Automatic severity prediction
-* Image-based emergency detection
-* Intelligent duplicate detection
-* Automated authority assignment
+## 🚑 Emergency Response
 
-### 🚑 Emergency Response
+- Role-based responder accounts
+- Police department integration
+- Fire department integration
+- Ambulance and medical responder integration
+- Nearby responder assignment
+- Emergency resource tracking
 
-* Role-based responder accounts
-* Police department integration
-* Fire department integration
-* Ambulance and medical responder integration
-* Nearby responder assignment
-* Emergency resource tracking
+## 📢 Notifications
 
-### 📢 Notifications
+- Web Push notifications
+- Firebase Cloud Messaging (FCM)
+- SMS emergency alerts
+- Location-based alerts
+- Regional emergency broadcasts
 
-* Web Push notifications
-* Firebase Cloud Messaging (FCM)
-* SMS emergency alerts
-* Location-based alerts
-* Regional emergency broadcasts
+## 🌍 Large-Scale Deployment
 
-### 🌍 Large-Scale Deployment
+- Multi-city support
+- District-level dashboards
+- State-level command centers
+- Regional incident analytics
+- Disaster management authority integration
 
-* Multi-city support
-* District-level dashboards
-* State-level command centers
-* Regional incident analytics
-* Disaster management authority integration
+## 🔐 Security & Integrity
 
-### 🔐 Security & Integrity
-
-* Role-Based Access Control (RBAC)
-* Detailed audit logs
-* Rate limiting
-* Advanced authentication
-* Blockchain-based incident integrity and audit trails
+- Role-Based Access Control (RBAC)
+- Detailed audit logs
+- Rate limiting
+- Advanced authentication
+- Blockchain-based incident integrity and audit trails
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
+Contributions are welcome!
 
 ### 1. Fork the Repository
 
@@ -489,6 +492,7 @@ git checkout -b feature/amazing-feature
 ### 3. Commit Your Changes
 
 ```bash
+git add .
 git commit -m "Add amazing feature"
 ```
 
@@ -510,8 +514,12 @@ This project is distributed under the **MIT License**.
 
 ---
 
+<div align="center">
+
 # 🚨 SentinelLink
 
-**Report Faster. Respond Smarter. Save Lives.**
+### Report Faster. Respond Smarter. Save Lives.
 
-Built with ❤️ for the **Hackathon**.
+**Built with ❤️ for the Hackathon**
+
+</div>
