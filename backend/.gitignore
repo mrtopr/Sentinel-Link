@@ -1,7 +1,24 @@
-node_modules/
-dist/
+# Environment files & Secrets
 .env
+.env.*
+!.env.example
+!.env*.example
+
+# Dependencies
+node_modules/
+
+# Build Output
+dist/
+
+# Logs
 *.log
-.DS_Store
+crash.log
+
+# Coverage & Testing
 coverage/
 .nyc_output/
+
+# OS & Editor
+.DS_Store
+.vscode/
+.idea/
